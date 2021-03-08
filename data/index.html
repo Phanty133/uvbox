@@ -6,11 +6,71 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>UVBox</title>
 
-	<link href="/static/style.css" rel="stylesheet" type="text/css"/>
+	<link href="style.css" rel="stylesheet" type="text/css"/>
 </head>
 <body onload="init();">
-	Hello world!
+	<button id="btnSettings" class="button">&#9881;</button>
+	<h1>UVBox WebUI</h1>
 
-	<script src="/static/main.js"></script>
+	<div id="mainContainer">
+		<div id="inactiveContainer" class="menuContainer" style="display: block;">
+			<h2>Inactive</h2>
+	
+			<input type="number" placeholder="Time (s)" id="inputTime"/> <br/><br/>
+			<button id="btnStart" class="button">Start</button>
+		</div>
+	
+		<div id="activeContainer" class="menuContainer">
+			<h2>Active</h2>
+	
+			<span>Time remaining</span>
+			<br/>
+			<span id="timeRemaining">2:11</span>
+			<br/><br/>
+			<button id="btnStart" class="button">Stop</button>
+		</div>
+
+		<div id="settingsContainer" class="menuContainer">
+			<h2>Settings</h2>
+
+			<input type="checkbox" checked/> <label>Create an access point</label><br/>
+
+			<div id="networkSettingsContainer">
+				<div id="networkContainer">
+					<div class="networkEntry">
+						<span>Network1</span>
+						<span> -76db</span>
+						<button class="button">Connect</button>
+					</div>
+
+					<div class="networkEntry">
+						<span>Network1</span>
+						<span> -76db</span>
+						<button class="button">Connect</button>
+					</div>
+				</div>
+				
+				<input type="checkbox" /> <label>Static IP</label><br/><br/>
+
+				<div id="staticIPContainer">
+					<label>Local IP</label> <input type="text" placeholder="Local IP" disabled/>
+					<label>Gateway</label> <input type="text" placeholder="Gateway" disabled>
+					<label>Subnet mask</label> <input type="text" placeholder="Subnet mask" disabled>
+				</div>
+			</div>
+
+			<br/>
+			<button class="button">Apply</button>
+		</div>
+	</div>
+
+	<div id="infoPanel">
+		<h2>Info</h2>
+		<span>IP address: <span id="infoIP">192.168.4.1</span></span>
+		<span>Gateway: <span id="infoIP">192.168.4.1</span></span>
+		<span>Subnet mask: <span id="infoIP">255.255.255.0</span></span>
+	</div>
+
+	<script src="main.js"></script>
 </body>
 </html>

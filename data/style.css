@@ -1,0 +1,174 @@
+:root{
+	--main-color: #1976d2;
+	--main-negative: #d32f2f;
+	--main-positive: #388e3c;
+}
+
+html{
+	font-family: sans-serif;
+}
+
+#mainContainer{
+	position: relative;
+	width: 30vw;
+	left: 34vw;
+	display: flex;
+	align-content: center;
+	justify-content: center;
+	padding: 1vw;
+
+	-webkit-box-shadow: 10px 10px 15px 0px rgba(0,0,0,0.25);
+	-moz-box-shadow: 10px 10px 15px 0px rgba(0,0,0,0.25);
+	box-shadow: 10px 10px 15px 0px rgba(0,0,0,0.25);
+}
+
+#activeContainer{
+	display: none;
+	text-align: center;
+}
+
+#activeContainer h2{
+	color: var(--main-positive);
+}
+
+#activeContainer span{
+	font-size: 18pt;
+}
+
+#activeContainer #timeRemaining{
+	font-size: 32pt;
+}
+
+#inactiveContainer{
+	display: none;
+	text-align: center;
+}
+
+#inactiveContainer h2{
+	color: var(--main-negative);
+}
+
+#inactiveContainer input{
+	font-size: 16pt;
+}
+
+.menuContainer h2{
+	margin-top: 0;
+	font-size: 40pt;
+}
+
+h1{
+	text-align: center;
+	font-size: 5vw;
+	color: var(--main-color);
+	margin-bottom: 0.5em;
+}
+
+.button{
+	color: white;
+	background-color: #6abf69;
+	border: none;
+	font-size: 18pt;
+	padding: 5px;
+	width: 10vw;
+	cursor: pointer;
+
+	transition: filter 0.5s;
+}
+
+.button:hover{
+	filter: brightness(85%);
+}
+
+#btnSettings{
+	border: none;
+	font-size: 3vw;
+	width: 1.5em;
+	height: 1.5em;
+	cursor: pointer;
+	position: absolute;
+	background-color: #EEE;
+	border-radius: 50%;
+	left: 28vw;
+	top: 4vw;
+}
+
+#settingsContainer{
+	display: none;
+	width: 100%;
+	text-align: center;
+}
+
+#settingsContainer h2{
+	color: #0288d1;
+}
+
+#networkContainer{
+	display: grid;
+	grid-auto-flow: row;
+	width: calc(100% - 2vh);
+	margin-top: 1vh;
+	margin-bottom: 1vh;
+	padding: 1vh;
+	border: 1px solid black;
+}
+
+.networkEntry{
+	display: grid;
+	grid-template-columns: 1fr auto auto;
+	column-gap: 1em;
+	text-align: left;
+	border-bottom: 1px solid grey;
+	margin-top: 0.5vh;
+	padding-bottom: 0.5vh;
+}
+
+.networkEntry .button{
+	height: 1.2em;
+	font-size: 1em;
+	width: auto;
+	padding: 0.1em 0.5em 0 0.5em;
+	background-color: #0288d1;
+}
+
+.networkEntry:last-child{
+	border: none;
+}
+
+#staticIPContainer{
+	display: grid;
+	width: 75%;
+	position: relative;
+	left: 12.5%;
+	grid-template-columns: auto auto;
+	row-gap: 0.5em;
+	column-gap: 0.5em;
+}
+
+#infoPanel{
+	-webkit-box-shadow: 10px 10px 15px 0px rgba(0,0,0,0.25);
+	-moz-box-shadow: 10px 10px 15px 0px rgba(0,0,0,0.25);
+	box-shadow: 10px 10px 15px 0px rgba(0,0,0,0.25);
+	
+	width: 20vw;
+	display: grid;
+	text-align: center;
+	padding: 0.5vw;
+
+	position: absolute;
+	top: 5vw;
+	right: 5vw;
+}
+
+#infoPanel h2{
+	margin-top: 0;
+	color: #0288d1;
+}
+
+#infoPanel span{
+	color: black;
+}
+
+#infoPanel span > span{
+	color: #0288d1;
+}
