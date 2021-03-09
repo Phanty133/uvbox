@@ -44,3 +44,7 @@ void TimerSet::check(){
 		}
 	}
 }
+
+int TimerSet::timeRemaining(int i){ // Get the time remaining for a timer
+	return this->timers[i]->timeRemaining();
+}

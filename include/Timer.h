@@ -21,6 +21,7 @@ struct Timer { // A simple timer
 	Timer(float _length, void (*_cb) ());
 	Timer(float _length, void (*_cb)(void*), void* _cbArg, bool freeArg = true); // If the callback needs an argument
 	bool check();
+	int timeRemaining();
 };
 
 #endif

@@ -16,6 +16,8 @@ html{
 	align-content: center;
 	justify-content: center;
 	padding: 1vw;
+	max-height: 65vh;
+	overflow-y: auto;
 
 	-webkit-box-shadow: 10px 10px 15px 0px rgba(0,0,0,0.25);
 	-moz-box-shadow: 10px 10px 15px 0px rgba(0,0,0,0.25);
@@ -52,6 +54,14 @@ html{
 	font-size: 16pt;
 }
 
+.menuContainer{
+	display: none;
+}
+
+.menuContainer[data-menuactive]{
+	display: block !important;
+}
+
 .menuContainer h2{
 	margin-top: 0;
 	font-size: 40pt;
@@ -80,17 +90,22 @@ h1{
 	filter: brightness(85%);
 }
 
+.button[disabled]{
+	filter: brightness(70%);
+	cursor: initial;
+}
+
 #btnSettings{
 	border: none;
-	font-size: 3vw;
-	width: 1.5em;
+	font-size: 2vw;
 	height: 1.5em;
 	cursor: pointer;
-	position: absolute;
-	background-color: #EEE;
-	border-radius: 50%;
-	left: 28vw;
-	top: 4vw;
+	background-color: #0288d1;
+	color: white;
+	display: flex;
+	justify-self: center;
+	justify-content: center;
+	margin-top: 0.5em;
 }
 
 #settingsContainer{
@@ -104,13 +119,16 @@ h1{
 }
 
 #networkContainer{
-	display: grid;
-	grid-auto-flow: row;
 	width: calc(100% - 2vh);
 	margin-top: 1vh;
 	margin-bottom: 1vh;
 	padding: 1vh;
 	border: 1px solid black;
+}
+
+#networkEntryContainer{
+	display: grid;
+	grid-auto-flow: row;
 }
 
 .networkEntry{
@@ -120,7 +138,15 @@ h1{
 	text-align: left;
 	border-bottom: 1px solid grey;
 	margin-top: 0.5vh;
+	padding: 0.25em;
 	padding-bottom: 0.5vh;
+
+	transition: background-color 0.5s, color 0.5s;
+}
+
+.networkEntry[data-selected]{
+	background-color: #6abf69;
+	color: white;
 }
 
 .networkEntry .button{
@@ -129,6 +155,11 @@ h1{
 	width: auto;
 	padding: 0.1em 0.5em 0 0.5em;
 	background-color: #0288d1;
+}
+
+.networkEntry[data-selected] .button{
+	filter: brightness(65%);
+	cursor: initial;
 }
 
 .networkEntry:last-child{
@@ -143,6 +174,17 @@ h1{
 	grid-template-columns: auto auto;
 	row-gap: 0.5em;
 	column-gap: 0.5em;
+}
+
+#staticIPContainer button{
+	grid-column: 1 / span 2;
+	display: flex;
+	justify-self: center;
+	justify-content: center;
+}
+
+#btnApplySettings{
+	margin-top: 0.5em;
 }
 
 #infoPanel{
@@ -172,3 +214,126 @@ h1{
 #infoPanel span > span{
 	color: #0288d1;
 }
+
+#pwdModalContainer{
+	position: absolute;
+	left: 0;
+	top: 0;
+	background-color: rgba(0,0,0,0.5);
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1337;
+
+	display: none;
+}
+
+#passwordPrompt{
+	background-color: white;
+	padding: 1vw;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	column-gap: 1em;
+	row-gap: 0.5em;
+	border-radius: 5px;
+
+	-webkit-box-shadow: 10px 10px 15px 0px rgba(0,0,0,0.25);
+	-moz-box-shadow: 10px 10px 15px 0px rgba(0,0,0,0.25);
+	box-shadow: 10px 10px 15px 0px rgba(0,0,0,0.25);
+}
+
+#inputPassword{
+	grid-column: 1 / span 2;
+}
+
+/* Spinner */
+
+.loader,
+.loader:before,
+.loader:after {
+  background: #0288d1;
+  -webkit-animation: load1 1s infinite ease-in-out;
+  animation: load1 1s infinite ease-in-out;
+  width: 1em;
+  height: 4em;
+}
+.loader {
+  color: #0288d1;
+  text-indent: -9999em;
+  margin: 10vw auto;
+  position: relative;
+  font-size: 11px;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+.loader:before,
+.loader:after {
+  position: absolute;
+  top: 0;
+  content: '';
+}
+.loader:before {
+  left: -1.5em;
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+.loader:after {
+  left: 1.5em;
+}
+@-webkit-keyframes load1 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 0;
+    height: 4em;
+  }
+  40% {
+    box-shadow: 0 -2em;
+    height: 5em;
+  }
+}
+@keyframes load1 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 0;
+    height: 4em;
+  }
+  40% {
+    box-shadow: 0 -2em;
+    height: 5em;
+  }
+}
+
+@media only screen and (max-width: 720px) {
+	h1 {
+	  font-size: 10vw;
+	}
+
+	#mainContainer{
+		width: 78vw;
+		max-height: 45vh;
+		left: 8vw;
+	}
+
+	#infoPanel{
+		width: 79vw;
+		left: 10vw;
+		height: 25vh;
+		top: 65vh;
+	}
+	
+	.button{
+		width: 30vw;
+		margin-bottom: 0.5em;
+	}
+
+	#btnSettings{
+		font-size: 5vw;
+	}
+  }

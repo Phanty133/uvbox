@@ -2,9 +2,9 @@
 
 Storage::Storage(){}
 
-Storage::Storage(size_t _schema[MAXSCHEMASIZE], int _startAddress){
+Storage::Storage(size_t _schema[], int _schemaSize, int _startAddress){
 	this->startAddress = _startAddress;
-	this->schemaSize = sizeof(_schema) / sizeof(size_t) + 1;
+	this->schemaSize = _schemaSize;
 
 	for(int i = 0; i < this->schemaSize; i++){
 		this->schema[i] = _schema[i];
@@ -19,25 +19,37 @@ Storage::Storage(size_t _schema[MAXSCHEMASIZE], int _startAddress){
 	}
 }
 
-bool Storage::set(int index, void* val, bool commit){ // Returns false if the index is out of range of the schema
+bool Storage::set(int index, void* valptr, int mode, bool update){ // Returns false if the index is out of range of the schema
 	if(index >= this->schemaSize) return false;
-	
+
 	for(int i = 0; i < this->schema[index]; i++){
-		EEPROM.write(this->addressMap[index] + i, *(uint8_t*)(val + i));	
+		uint8_t val = *((uint8_t*)(valptr + i));
+		int addr = this->addressMap[index] + i;
+
+		if(update){
+			if(EEPROM.read(addr) != val) EEPROM.write(addr, val);
+		}
+		else{
+			EEPROM.write(addr, val);
+		}
 	}
 
-	if(commit) EEPROM.commit();
+	switch(mode){
+		case 1:
+			EEPROM.commit();
+			break;
+		case 2:
+			EEPROM.end();
+			break;
+	}
+
 	return true;
 }
 
-void* Storage::get(int index){ 
-	uint8_t values[this->schema[index]];
-
+void Storage::get(int index, uint8_t buf[]){ 
 	for(int i = 0; i < this->schema[index]; i++){
-		values[i] = EEPROM.read(this->addressMap[index] + i);
+		buf[i] = EEPROM.read(this->addressMap[index] + i);
 	}
-
-	return (void*)&values;
 }
 
 bool Storage::clear(int index, bool commit){ // Returns false if the index is out of range of the schema
@@ -57,4 +69,18 @@ void Storage::clearAll(bool commit){
 	}
 
 	if(commit) EEPROM.commit();
+}
+
+void Storage::printMemory(){
+	for(int i = 0; i < this->schemaSize; i++){
+		Serial.print(i);
+		Serial.print(": ");
+
+		for(int addr = 0; addr < this->schema[i]; addr++){
+			Serial.print(EEPROM.read(this->addressMap[i] + addr));
+			Serial.print(" ");
+		}
+
+		Serial.println();
+	}
 }

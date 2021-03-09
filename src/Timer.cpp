@@ -41,3 +41,7 @@ bool Timer::check(){
 		
 	return false;
 }
+
+int Timer::timeRemaining(){
+	return this->endTime - millis();
+}

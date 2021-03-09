@@ -15,6 +15,7 @@ struct TimerSet { // A simple container for timers
 	int addTimerWithArg(float length, void (*cb)(void*), void* cbArg, bool freeArg = true);
 	void stopTimer(int i);
 	void check();
+	int timeRemaining(int i);
 };
 
 #endif
